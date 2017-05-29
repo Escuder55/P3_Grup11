@@ -21,10 +21,13 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ULTIMA PRÀCTICA DE PROGRAMACIÓ\Renderer.hh">
+    <ClInclude Include="..\..\ULTIMA PRÀCTICA DE PROGRAMACIÓ\Input.inl.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ULTIMA PRÀCTICA DE PROGRAMACIÓ\Input.inl.hh">
+    <ClInclude Include="gameController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,7 +41,10 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ULTIMA PRÀCTICA DE PROGRAMACIÓ\Renderer.cc">
+    <ClCompile Include="gameController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

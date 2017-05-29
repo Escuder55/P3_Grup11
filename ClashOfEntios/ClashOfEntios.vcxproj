@@ -147,15 +147,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ULTIMA PRÀCTICA DE PROGRAMACIÓ\Input.inl.hh" />
-    <ClInclude Include="..\..\ULTIMA PRÀCTICA DE PROGRAMACIÓ\Renderer.hh" />
     <ClInclude Include="battlefield.h" />
+    <ClInclude Include="gameController.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Renderer.hh" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\ULTIMA PRÀCTICA DE PROGRAMACIÓ\Renderer.cc" />
     <ClCompile Include="battlefield.cpp" />
+    <ClCompile Include="gameController.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Renderer.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
