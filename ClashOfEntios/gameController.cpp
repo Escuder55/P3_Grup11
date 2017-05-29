@@ -12,7 +12,7 @@ gameController::~gameController()
 }
 
 
-Player::Entio lessFatigue (Player &p, Player :: Entio MyEntio)
+Player::Entio lessFatigue (Player &p, Player :: Entio &MyEntio)
 {
 	int auxFatigue = MyEntio.fatigue;
 	Player::Entio auxEntio = MyEntio; 

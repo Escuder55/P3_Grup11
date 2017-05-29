@@ -2,6 +2,7 @@
 
 
 
+
 battlefield::battlefield()
 {
 	
@@ -72,11 +73,36 @@ void main()
 	
 	for (int i = 0; i < myField.rows; i++)
 	{
-		for (int j = 0; j < myField.columns; j++)
+		for (int j = 0; j < myField.columns - 1; j++)
 		{
+			if (myField.field[i][j] == 'X')
+			{
+				enti::cout <<enti::Color :: RED << 'X' << " ";
+			}
 			
-			std::cout << myField.field[i][j] << std::flush;
+			else if (myField.field[i][j] == 'O')
+			{
+				enti::cout << enti::Color::CYAN << myField.field[i][j] << " ";
+
+			}
+
+			else if (myField.field[i][j] == ':')
+			{
+				enti::cout << enti::Color:: GREEN << myField.field[i][j] << " ";
+			}
+			else if (myField.field[i][j] == '.')
+			{
+				enti::cout << enti::Color::BROWN << myField.field[i][j] << " ";
+			}
+			else if (myField.field[i][j] >= '0' || myField.field[i][j] <= '6')
+			{
+				enti::cout << enti :: Color :: MAGENTA << myField.field[i][j] << " ";
+			}
+			std::cout << " ";
+		 
 		}
-		std::cout << std::endl;
+		enti::cout << enti::endl;
 	}
+	enti::cout << enti::cend;
 }
+	
