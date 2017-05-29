@@ -7,7 +7,7 @@ battlefield::battlefield()
 	
 	
 	{
-		std::ifstream level("default.cfg"); //Creo mi archivo file de tipo ifstream en el que cargo el contenido del documento default.cfg (el campo de juego)
+		std::ifstream level("default.cfg"); 
 		std::string line;
 
 		if (level.is_open())
