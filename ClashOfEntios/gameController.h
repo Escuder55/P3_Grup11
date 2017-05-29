@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "battlefield.h"
+#include "Input.inl.hh"
 
 class gameController
 {

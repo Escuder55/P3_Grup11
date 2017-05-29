@@ -7,30 +7,8 @@ battlefield::battlefield()
 {
 	
 	
-
-	//std::ifstream level("default.cfg");
-	//std::string line;
-
-	////field[rows][columns];
-	//if (level.is_open())
-	//{
-	//	for (int i = 0; i < rows ; i++)
-	//	{
-	//		getline(level, line);
-
-	//		for (int j = 0; j < line.size(); i++)
-	//		{
-	//			field[i][j] = line[j];
-	//		}
-	//	}
-	//}
-	//else
-	//{
-	//	std::cout << "The file can't been opened!!" << std::endl;
-	//}
-	//level.close();		
 	{
-		std::ifstream level("default.cfg"); //Creo mi archivo file de tipo ifstream en el que cargo el contenido del documento default.cfg (el campo de juego)
+		std::ifstream level("default.cfg"); 
 		std::string line;
 
 		if (level.is_open())

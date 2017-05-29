@@ -10,6 +10,8 @@
 
 #define rowsSize 36
 #define columnsSize 74
+
+
 class battlefield
 {
 public:
