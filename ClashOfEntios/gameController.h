@@ -10,7 +10,7 @@ public:
 	Player &p;
 	battlefield &b;
 
-	Player::Entio lessFatigue(Player MyPlayer);
+	Player::Entio lessFatigue(Player &p, Player::Entio &MyEntio);
 
 	//bool arrowThrowEntio(Player::Entio MyEntio);
 

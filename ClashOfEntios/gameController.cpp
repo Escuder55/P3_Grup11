@@ -7,16 +7,14 @@ gameController::gameController(Player &p, battlefield &b):p(p), b(b)
 }
 
 
-gameController::~gameController()
-{
-}
 
 
-Player::Entio lessFatigue (Player &p, Player :: Entio &MyEntio)
+
+Player::Entio gameController::lessFatigue(Player & p, Player::Entio & MyEntio)
 {
 	int auxFatigue = MyEntio.fatigue;
-	Player::Entio auxEntio = MyEntio; 
-	
+	Player::Entio auxEntio = MyEntio;
+
 	if (p.MyEntio1.fatigue < auxFatigue)
 	{
 		auxEntio = p.MyEntio1;
@@ -54,5 +52,8 @@ Player::Entio lessFatigue (Player &p, Player :: Entio &MyEntio)
 	}
 
 	return auxEntio;
+}
 
+gameController::~gameController()
+{
 }
