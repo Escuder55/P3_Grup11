@@ -7,14 +7,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define rowsSize 36
+#define columnsSize 74
 class battlefield
 {
 public:
 	
-	int rows{ 36 };
-	int columns{74};
+	int rows{ rowsSize };
+	int columns{columnsSize};
 
-	char field[36][74];
+	char field[rowsSize][columnsSize];
 
 
 	battlefield();
