@@ -4,29 +4,29 @@
 
 battlefield::battlefield()
 {
-	rows = 74;
-	columns = 36;
-	field = new char *[rows];
+	
+	
 
-	for (int i = 0; i < rows; i++)
+	std::ifstream level("default.cfg");
+	std::string line;
+
+	//field[rows][columns];
+
+	for (int i = 0; i < rows-1 ; i++)
 	{
-		field[i] = new char[columns];
+		getline(level, line);
+	
+
+		for (int j = 0; j < columns; i++)
+		{
+			field[i][j] = line[j];
+		}
 	}
 	
 
-	//std::ifstream level("default.cfg");
-	FILE *level;
-	fopen("default.cfg", "r");
-
-		for (int i = 0; i <= rows; i++)
-		{
-			for (int j = 0; j < columns; i++)
-			{
-				field[i][j] = fgetc(level);				
-			}
-		}
+	
 		 
-		fclose(level);
+		
 
 
 }
@@ -43,4 +43,19 @@ void battlefield::setCell(int x, int y, char element)
 
 battlefield::~battlefield()
 {
+}
+
+
+void main()
+{
+	battlefield myField;
+	/*
+	for (int i = 0; i < myField.rows; i++)
+	{
+		for (int j = 0; j < myField.columns; j++)
+		{
+			std::cout << myField.field[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}*/
 }
