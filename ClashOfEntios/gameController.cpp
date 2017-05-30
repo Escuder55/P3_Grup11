@@ -3,7 +3,9 @@
 
 
 
-gameController::gameController(Player &p, battlefield &b):p(p), b(b)
+
+
+gameController::gameController(Player & p, battlefield & b, Player & p2): p(p), b(b), p2(p2)
 {
 }
 
@@ -17,37 +19,16 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 
 	//system("pause");
 
-	keyPressed = enti::getInputKey();
+	keyPressed = gameController::waitUntilKeypressed();
 
 	if (keyPressed == enti::InputKey::W || keyPressed == enti::InputKey::w)
-	{
-		char aux;
-		int posAuxX = currentEntio.posX;
-		int posAuxY = currentEntio.posY + 1;
-
-		aux = b.getCell(posAuxX, posAuxY);
-		if (aux != '.' || aux != ':')
-		{
-			std::cout << "You cannot do this movement" << std::endl;
-			system("pause");
-		}
-		else
-		{
-			char entio = currentEntio.name;
-			b.setCell(currentEntio.posX, currentEntio.posY, currentEntio.actualGround);
-			currentEntio.posY++;
-			currentEntio.actualGround = b.getCell(currentEntio.posX, currentEntio.posY);
-			b.setCell(currentEntio.posX, currentEntio.posY, currentEntio.name);
-		}
-	}
-	else if (keyPressed == enti::InputKey::A || keyPressed == enti::InputKey::a)
 	{
 		char aux;
 		int posAuxX = currentEntio.posX - 1;
 		int posAuxY = currentEntio.posY;
 
 		aux = b.getCell(posAuxX, posAuxY);
-		if (aux != '.' || aux != ':')
+		if (aux != '.' && aux != ':')
 		{
 			std::cout << "You cannot do this movement" << std::endl;
 			system("pause");
@@ -61,14 +42,14 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 			b.setCell(currentEntio.posX, currentEntio.posY, currentEntio.name);
 		}
 	}
-	else if (keyPressed == enti::InputKey::S || keyPressed == enti::InputKey::s)
+	else if (keyPressed == enti::InputKey::A || keyPressed == enti::InputKey::a)
 	{
 		char aux;
 		int posAuxX = currentEntio.posX;
 		int posAuxY = currentEntio.posY - 1;
 
 		aux = b.getCell(posAuxX, posAuxY);
-		if (aux != '.' || aux != ':')
+		if (aux != '.' && aux != ':')
 		{
 			std::cout << "You cannot do this movement" << std::endl;
 			system("pause");
@@ -82,14 +63,14 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 			b.setCell(currentEntio.posX, currentEntio.posY, currentEntio.name);
 		}
 	}
-	else if (keyPressed == enti::InputKey::D || keyPressed == enti::InputKey::d)
+	else if (keyPressed == enti::InputKey::S || keyPressed == enti::InputKey::s)
 	{
 		char aux;
 		int posAuxX = currentEntio.posX + 1;
 		int posAuxY = currentEntio.posY;
 
 		aux = b.getCell(posAuxX, posAuxY);
-		if (aux != '.' || aux != ':')
+		if (aux != '.' && aux != ':')
 		{
 			std::cout << "You cannot do this movement" << std::endl;
 			system("pause");
@@ -99,6 +80,27 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 			char entio = currentEntio.name;
 			b.setCell(currentEntio.posX, currentEntio.posY, currentEntio.actualGround);
 			currentEntio.posX++;
+			currentEntio.actualGround = b.getCell(currentEntio.posX, currentEntio.posY);
+			b.setCell(currentEntio.posX, currentEntio.posY, currentEntio.name);
+		}
+	}
+	else if (keyPressed == enti::InputKey::D || keyPressed == enti::InputKey::d)
+	{
+		char aux;
+		int posAuxX = currentEntio.posX;
+		int posAuxY = currentEntio.posY + 1;
+
+		aux = b.getCell(posAuxX, posAuxY);
+		if (aux != '.' && aux != ':')
+		{
+			std::cout << "You cannot do this movement" << std::endl;
+			system("pause");
+		}
+		else
+		{
+			char entio = currentEntio.name;
+			b.setCell(currentEntio.posX, currentEntio.posY, currentEntio.actualGround);
+			currentEntio.posY++;
 			currentEntio.actualGround = b.getCell(currentEntio.posX, currentEntio.posY);
 			b.setCell(currentEntio.posX, currentEntio.posY, currentEntio.name);
 		}
@@ -136,8 +138,8 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 
 	else if (keyPressed == enti::InputKey::SPACEBAR)
 	{
-		std::cout << "Press 1 to attack with sword" << std::endl;
-		std::cout << "Press 2 to attack with sword" << std::endl;
+		std::cout << "Press 1 to attack with Sword" << std::endl;
+		std::cout << "Press 2 to attack with Bow" << std::endl;
 
 		int weapon;
 		std::cin >> weapon;
@@ -158,198 +160,274 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 			std::cin >> direction;
 
 
-				switch (direction)
+			switch (direction)
+			{
+
+			case 1:
+				attackCell = b.getCell(currentEntio.posX - 1, currentEntio.posY);
+
+				if (secondPlayer.MyEntio1.name == attackCell)
 				{
-					
-				case 1:
-					attackCell = b.getCell(currentEntio.posX - 1, currentEntio.posY);
-
-					if (secondPlayer.MyEntio1.name == attackCell)
-					{
-						secondPlayer.MyEntio1.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio2.name == attackCell)
-					{
-						secondPlayer.MyEntio2.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio3.name == attackCell)
-					{
-						secondPlayer.MyEntio3.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio4.name == attackCell)
-					{
-						secondPlayer.MyEntio4.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio5.name == attackCell)
-					{
-						secondPlayer.MyEntio5.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio6.name == attackCell)
-					{
-						secondPlayer.MyEntio6.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else
-					{
-						std::cout << "Attack Missed" << std::endl;
-					}
-
-					break;
-
-				case 2:
-					attackCell = b.getCell(currentEntio.posX, currentEntio.posY - 1);
-
-					if (secondPlayer.MyEntio1.name == attackCell)
-					{
-						secondPlayer.MyEntio1.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio2.name == attackCell)
-					{
-						secondPlayer.MyEntio2.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio3.name == attackCell)
-					{
-						secondPlayer.MyEntio3.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio4.name == attackCell)
-					{
-						secondPlayer.MyEntio4.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio5.name == attackCell)
-					{
-						secondPlayer.MyEntio5.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio6.name == attackCell)
-					{
-						secondPlayer.MyEntio6.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else
-					{
-						std::cout << "Attack Missed" << std::endl;
-					}
-
-					break;
-
-				case 3:
-					attackCell = b.getCell(currentEntio.posX, currentEntio.posY + 1);
-
-					if (secondPlayer.MyEntio1.name == attackCell)
-					{
-						secondPlayer.MyEntio1.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio2.name == attackCell)
-					{
-						secondPlayer.MyEntio2.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio3.name == attackCell)
-					{
-						secondPlayer.MyEntio3.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio4.name == attackCell)
-					{
-						secondPlayer.MyEntio4.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio5.name == attackCell)
-					{
-						secondPlayer.MyEntio5.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio6.name == attackCell)
-					{
-						secondPlayer.MyEntio6.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else
-					{
-						std::cout << "Attack Missed" << std::endl;
-					}
-
-					break;
-
-				case 4:
-					attackCell = b.getCell(currentEntio.posX + 1, currentEntio.posY);
-
-					if (secondPlayer.MyEntio1.name == attackCell)
-					{
-						secondPlayer.MyEntio1.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio2.name == attackCell)
-					{
-						secondPlayer.MyEntio2.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio3.name == attackCell)
-					{
-						secondPlayer.MyEntio3.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio4.name == attackCell)
-					{
-						secondPlayer.MyEntio4.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio5.name == attackCell)
-					{
-						secondPlayer.MyEntio5.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else if (secondPlayer.MyEntio6.name == attackCell)
-					{
-						secondPlayer.MyEntio6.live = 0;
-						secondPlayer.decreaseEntios();
-					}
-
-					else
-					{
-						std::cout << "Attack Missed" << std::endl;
-					}
-
-					break;
-
-
-
-				default:
-					break;
+					secondPlayer.MyEntio1.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio1.posX, secondPlayer.MyEntio1.posY, secondPlayer.MyEntio1.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
 				}
+
+				else if (secondPlayer.MyEntio2.name == attackCell)
+				{
+					secondPlayer.MyEntio2.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio2.posX, secondPlayer.MyEntio2.posY, secondPlayer.MyEntio2.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio3.name == attackCell)
+				{
+					secondPlayer.MyEntio3.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio3.posX, secondPlayer.MyEntio3.posY, secondPlayer.MyEntio3.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio4.name == attackCell)
+				{
+					secondPlayer.MyEntio4.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio4.posX, secondPlayer.MyEntio4.posY, secondPlayer.MyEntio4.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio5.name == attackCell)
+				{
+					secondPlayer.MyEntio5.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio5.posX, secondPlayer.MyEntio5.posY, secondPlayer.MyEntio5.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio6.name == attackCell)
+				{
+					secondPlayer.MyEntio6.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio6.posX, secondPlayer.MyEntio6.posY, secondPlayer.MyEntio6.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else
+				{
+					std::cout << "Attack Missed" << std::endl;
+					enti::systemPause();
+				}
+
+				break;
+
+			case 2:
+				attackCell = b.getCell(currentEntio.posX, currentEntio.posY - 1);
+
+				if (secondPlayer.MyEntio1.name == attackCell)
+				{
+					secondPlayer.MyEntio1.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio1.posX, secondPlayer.MyEntio1.posY, secondPlayer.MyEntio1.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio2.name == attackCell)
+				{
+					secondPlayer.MyEntio2.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio2.posX, secondPlayer.MyEntio2.posY, secondPlayer.MyEntio2.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio3.name == attackCell)
+				{
+					secondPlayer.MyEntio3.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio3.posX, secondPlayer.MyEntio3.posY, secondPlayer.MyEntio3.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio4.name == attackCell)
+				{
+					secondPlayer.MyEntio4.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio4.posX, secondPlayer.MyEntio4.posY, secondPlayer.MyEntio4.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio5.name == attackCell)
+				{
+					secondPlayer.MyEntio5.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio5.posX, secondPlayer.MyEntio5.posY, secondPlayer.MyEntio5.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio6.name == attackCell)
+				{
+					secondPlayer.MyEntio6.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio6.posX, secondPlayer.MyEntio6.posY, secondPlayer.MyEntio6.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else
+				{
+					std::cout << "Attack Missed" << std::endl;
+					enti::systemPause();
+				}
+
+				break;
+
+			case 3:
+				attackCell = b.getCell(currentEntio.posX + 1, currentEntio.posY);
+
+				if (secondPlayer.MyEntio1.name == attackCell)
+				{
+					secondPlayer.MyEntio1.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio1.posX, secondPlayer.MyEntio1.posY, secondPlayer.MyEntio1.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio2.name == attackCell)
+				{
+					secondPlayer.MyEntio2.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio2.posX, secondPlayer.MyEntio2.posY, secondPlayer.MyEntio2.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio3.name == attackCell)
+				{
+					secondPlayer.MyEntio3.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio3.posX, secondPlayer.MyEntio3.posY, secondPlayer.MyEntio3.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio4.name == attackCell)
+				{
+					secondPlayer.MyEntio4.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio4.posX, secondPlayer.MyEntio4.posY, secondPlayer.MyEntio4.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio5.name == attackCell)
+				{
+					secondPlayer.MyEntio5.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio5.posX, secondPlayer.MyEntio5.posY, secondPlayer.MyEntio5.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio6.name == attackCell)
+				{
+					secondPlayer.MyEntio6.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio6.posX, secondPlayer.MyEntio6.posY, secondPlayer.MyEntio6.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else
+				{
+					std::cout << "Attack Missed" << std::endl;
+					enti::systemPause();
+				}
+
+				break;
+
+			case 4:
+				attackCell = b.getCell(currentEntio.posX, currentEntio.posY + 1);
+
+				if (secondPlayer.MyEntio1.name == attackCell)
+				{
+					secondPlayer.MyEntio1.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio1.posX, secondPlayer.MyEntio1.posY, secondPlayer.MyEntio1.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio2.name == attackCell)
+				{
+					secondPlayer.MyEntio2.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio2.posX, secondPlayer.MyEntio2.posY, secondPlayer.MyEntio2.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio3.name == attackCell)
+				{
+					secondPlayer.MyEntio3.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio3.posX, secondPlayer.MyEntio3.posY, secondPlayer.MyEntio3.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio4.name == attackCell)
+				{
+					secondPlayer.MyEntio4.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio4.posX, secondPlayer.MyEntio4.posY, secondPlayer.MyEntio4.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio5.name == attackCell)
+				{
+					secondPlayer.MyEntio5.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio5.posX, secondPlayer.MyEntio5.posY, secondPlayer.MyEntio5.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else if (secondPlayer.MyEntio6.name == attackCell)
+				{
+					secondPlayer.MyEntio6.live = 0;
+					secondPlayer.decreaseEntios();
+					b.setCell(secondPlayer.MyEntio6.posX, secondPlayer.MyEntio6.posY, secondPlayer.MyEntio6.actualGround);
+					std::cout << "You killed an Entio" << std::endl;
+					enti::systemPause();
+				}
+
+				else
+				{
+					std::cout << "Attack Missed" << std::endl;
+					enti::systemPause();
+				}
+
+				break;
+
+
+
+			default:
+				break;
+			}
 
 			break;
 
@@ -370,6 +448,8 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 					attackCell = b.getCell(currentEntio.posX - i, currentEntio.posY);
 					if (attackCell == 'X')
 					{
+						std::cout << "Attack Missed" << std::endl;
+						enti::systemPause();
 						break;
 
 					}
@@ -379,7 +459,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio1.live -= (11 - i);
 						if (secondPlayer.MyEntio1.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -389,7 +471,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio2.live -= (11 - i);
 						if (secondPlayer.MyEntio2.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -398,7 +482,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio3.live -= (11 - i);
 						if (secondPlayer.MyEntio3.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -407,7 +493,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio4.live -= (11 - i);
 						if (secondPlayer.MyEntio4.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -416,7 +504,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio5.live -= (11 - i);
 						if (secondPlayer.MyEntio5.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -425,14 +515,22 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio6.live -= (11 - i);
 						if (secondPlayer.MyEntio6.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
+					else
+					{
+						std::cout << "Attack Missed" << std::endl;
+						enti::systemPause();
+						break;
+					}
 				}
-				
+
 				currentEntio.arrows--;
-				
+
 				break;
 
 			case 2:
@@ -442,6 +540,8 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 					attackCell = b.getCell(currentEntio.posX, currentEntio.posY - i);
 					if (attackCell == 'X')
 					{
+						std::cout << "Attack Missed" << std::endl;
+						enti::systemPause();
 						break;
 
 					}
@@ -451,7 +551,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio1.live -= (11 - i);
 						if (secondPlayer.MyEntio1.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -461,7 +563,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio2.live -= (11 - i);
 						if (secondPlayer.MyEntio2.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -470,7 +574,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio3.live -= (11 - i);
 						if (secondPlayer.MyEntio3.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -479,7 +585,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio4.live -= (11 - i);
 						if (secondPlayer.MyEntio4.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -488,7 +596,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio5.live -= (11 - i);
 						if (secondPlayer.MyEntio5.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -497,8 +607,16 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio6.live -= (11 - i);
 						if (secondPlayer.MyEntio6.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
+						break;
+					}
+					else
+					{
+						std::cout << "Attack Missed" << std::endl;
+						enti::systemPause();
 						break;
 					}
 				}
@@ -514,6 +632,8 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 					attackCell = b.getCell(currentEntio.posX + i, currentEntio.posY);
 					if (attackCell == 'X')
 					{
+						std::cout << "Attack Missed" << std::endl;
+						enti::systemPause();
 						break;
 
 					}
@@ -523,7 +643,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio1.live -= (11 - i);
 						if (secondPlayer.MyEntio1.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -533,7 +655,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio2.live -= (11 - i);
 						if (secondPlayer.MyEntio2.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -542,7 +666,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio3.live -= (11 - i);
 						if (secondPlayer.MyEntio3.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -551,7 +677,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio4.live -= (11 - i);
 						if (secondPlayer.MyEntio4.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -560,7 +688,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio5.live -= (11 - i);
 						if (secondPlayer.MyEntio5.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -569,8 +699,16 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio6.live -= (11 - i);
 						if (secondPlayer.MyEntio6.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
+						break;
+					}
+					else
+					{
+						std::cout << "Attack Missed" << std::endl;
+						enti::systemPause();
 						break;
 					}
 				}
@@ -586,6 +724,8 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 					attackCell = b.getCell(currentEntio.posX, currentEntio.posY + i);
 					if (attackCell == 'X')
 					{
+						std::cout << "Attack Missed" << std::endl;
+						enti::systemPause();
 						break;
 
 					}
@@ -595,7 +735,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio1.live -= (11 - i);
 						if (secondPlayer.MyEntio1.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
 						}
 						break;
 					}
@@ -605,63 +747,80 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						secondPlayer.MyEntio2.live -= (11 - i);
 						if (secondPlayer.MyEntio2.live <= 0)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.decreaseEntios();
+							std::cout << "You killed an Entio" << std::endl;
+							enti::systemPause();
+							break;
 						}
-						break;
-					}
-					else if (attackCell == secondPlayer.MyEntio3.name && i >= 3)
-					{
-						secondPlayer.MyEntio3.live -= (11 - i);
-						if (secondPlayer.MyEntio3.live <= 0)
+						else if (attackCell == secondPlayer.MyEntio3.name && i >= 3)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.MyEntio3.live -= (11 - i);
+							if (secondPlayer.MyEntio3.live <= 0)
+							{
+								secondPlayer.decreaseEntios();
+								std::cout << "You killed an Entio" << std::endl;
+								enti::systemPause();
+							}
+							break;
 						}
-						break;
-					}
-					else if (attackCell == secondPlayer.MyEntio4.name && i >= 3)
-					{
-						secondPlayer.MyEntio4.live -= (11 - i);
-						if (secondPlayer.MyEntio4.live <= 0)
+						else if (attackCell == secondPlayer.MyEntio4.name && i >= 3)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.MyEntio4.live -= (11 - i);
+							if (secondPlayer.MyEntio4.live <= 0)
+							{
+								secondPlayer.decreaseEntios();
+								std::cout << "You killed an Entio" << std::endl;
+								enti::systemPause();
+							}
+							break;
 						}
-						break;
-					}
-					else if (attackCell == secondPlayer.MyEntio5.name && i >= 3)
-					{
-						secondPlayer.MyEntio5.live -= (11 - i);
-						if (secondPlayer.MyEntio5.live <= 0)
+						else if (attackCell == secondPlayer.MyEntio5.name && i >= 3)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.MyEntio5.live -= (11 - i);
+							if (secondPlayer.MyEntio5.live <= 0)
+							{
+								secondPlayer.decreaseEntios();
+								std::cout << "You killed an Entio" << std::endl;
+								enti::systemPause();
+							}
+							break;
 						}
-						break;
-					}
-					else if (attackCell == secondPlayer.MyEntio6.name && i >= 3)
-					{
-						secondPlayer.MyEntio6.live -= (11 - i);
-						if (secondPlayer.MyEntio6.live <= 0)
+						else if (attackCell == secondPlayer.MyEntio6.name && i >= 3)
 						{
-							secondPlayer.decreaseEntios;
+							secondPlayer.MyEntio6.live -= (11 - i);
+							if (secondPlayer.MyEntio6.live <= 0)
+							{
+								secondPlayer.decreaseEntios();
+								std::cout << "You killed an Entio" << std::endl;
+								enti::systemPause();
+							}
+							break;
 						}
-						break;
+						else
+						{
+							std::cout << "Attack Missed" << std::endl;
+							enti::systemPause();
+							break;
+						}
 					}
+
+					currentEntio.arrows--;
+
+					break;
 				}
-
-				currentEntio.arrows--;
-
+				//currentEntio.arrows--;
 				break;
 			}
-		//currentEntio.arrows--;
-		break;
+
+			currentEntio.fatigue--;
+			currentPlayer.movementsDecrease();
 		}
 
-		currentEntio.fatigue--;
-		currentPlayer.movementsDecrease();
+		//enti::systemPause();
+
+		return exit;
+
 	}
-
-	//enti::systemPause();
-
-	return exit;
 
 }
 
@@ -711,7 +870,16 @@ Player::Entio gameController::lessFatigue(Player & p, Player::Entio & MyEntio)
 	return auxEntio;
 }
 
+enti::InputKey gameController::waitUntilKeypressed()
+{
+	enti::InputKey input;
+	do {
+		input = enti::getInputKey();
 
+	} while (input == enti::InputKey::NONE);
+
+	return input;
+}
 
 
 gameController::~gameController()

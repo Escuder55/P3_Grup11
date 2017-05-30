@@ -46,15 +46,18 @@ void main()
 	battlefield myBattleField;
 	printMap(myBattleField);
 	Player myPlayer(1, myBattleField);
-	gameController myGameController(myPlayer, myBattleField);
+	Player myPlayer2(2, myBattleField);
+	gameController myGameController(myPlayer, myBattleField, myPlayer2);
 
 	
 
-	while (true)
+	while (myPlayer2.numberOfEntios > 0)
 	{
-		myGameController.updateGame(myPlayer.MyEntio1,myBattleField,myPlayer);
+		myGameController.updateGame(myPlayer.MyEntio1,myBattleField,myPlayer, myPlayer2);
 		//system("cls");
 		printMap(myBattleField);
+		//std::cout << myPlayer.MyEntio1.posX << "/" << myPlayer.MyEntio1.posY;
 	}
 
+	std::cout << "YOU WIN!!" << std::endl;
 }

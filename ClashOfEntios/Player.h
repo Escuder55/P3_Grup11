@@ -23,6 +23,7 @@ public:
 	Entio MyEntio1, MyEntio2, MyEntio3, MyEntio4, MyEntio5, MyEntio6;
 
 	battlefield &b;
+	int numberOfEntios = 6;
 
 	int getMovementsRemaining();
 
@@ -39,10 +40,9 @@ public:
 
 private:
 
-	int movements;
+	int movements = 10;
 
-	int numberOfEntios;
-
+	
 
 };
 
