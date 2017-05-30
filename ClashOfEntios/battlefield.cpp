@@ -44,7 +44,7 @@ battlefield::~battlefield()
 {
 }
 
-
+/*
 void main()
 {
 	battlefield myField;
@@ -82,5 +82,5 @@ void main()
 		enti::cout << enti::endl;
 	}
 	enti::cout << enti::cend;
-}
+}*/
 	

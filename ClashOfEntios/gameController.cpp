@@ -6,15 +6,12 @@
 gameController::gameController(Player &p, battlefield &b):p(p), b(b)
 {
 }
-Player::Entio lessFatigue(Player &p)
+
+bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Player & currentPlayer)
 {
-	int auxFatigue = 0 ;
 
+	bool exit = false;
 
-
-}
-void updateGame(Player::Entio &currentEntio, battlefield &b, Player &currentPlayer)
-{
 	enti::InputKey keyPressed;
 	enti::systemPause();
 
@@ -30,6 +27,7 @@ void updateGame(Player::Entio &currentEntio, battlefield &b, Player &currentPlay
 		if (aux != '.' || aux != ':')
 		{
 			std::cout << "You cannot do this movement" << std::endl;
+			system("pause");
 		}
 		else
 		{
@@ -43,13 +41,14 @@ void updateGame(Player::Entio &currentEntio, battlefield &b, Player &currentPlay
 	else if (keyPressed == enti::InputKey::A || keyPressed == enti::InputKey::a)
 	{
 		char aux;
-		int posAuxX = currentEntio.posX-1;
+		int posAuxX = currentEntio.posX - 1;
 		int posAuxY = currentEntio.posY;
 
 		aux = b.getCell(posAuxX, posAuxY);
 		if (aux != '.' || aux != ':')
 		{
 			std::cout << "You cannot do this movement" << std::endl;
+			system("pause");
 		}
 		else
 		{
@@ -70,6 +69,7 @@ void updateGame(Player::Entio &currentEntio, battlefield &b, Player &currentPlay
 		if (aux != '.' || aux != ':')
 		{
 			std::cout << "You cannot do this movement" << std::endl;
+			system("pause");
 		}
 		else
 		{
@@ -90,6 +90,7 @@ void updateGame(Player::Entio &currentEntio, battlefield &b, Player &currentPlay
 		if (aux != '.' || aux != ':')
 		{
 			std::cout << "You cannot do this movement" << std::endl;
+			system("pause");
 		}
 		else
 		{
@@ -102,13 +103,58 @@ void updateGame(Player::Entio &currentEntio, battlefield &b, Player &currentPlay
 	}
 	else if (keyPressed == enti::InputKey::ENTER)
 	{
-		
+
 	}
 
+	else if (keyPressed == enti::InputKey::ESC)
+	{
+		std::cout << "Are you sure you want to exit? (Y/N)" << std::endl;
 
+		char finish;
+
+		std::cin >> finish;
+
+		if (finish == 'Y' || finish == 'y')
+		{
+			exit = true;
+		}
+
+		else if (finish == 'N' || finish == 'n')
+		{
+
+		}
+		else
+		{
+			std::cout << "That is not a valid input";
+		}
+
+	}
+
+	else if (keyPressed == enti::InputKey::SPACEBAR)
+	{
+		std::cout << "Press 1 to attack with sword" << std::endl;
+		std::cout << "Press 2 to attack with sword" << std::endl;
+
+		int weapon;
+		std::cin >> weapon;
+
+		switch (weapon)
+		{
+		case 1:
+			std::cout << "Press 1 to attack up" << std::endl;
+			std::cout << "Press 2 to attack left" << std::endl;
+			std::cout << "Press 3 to attack down" << std::endl;
+			std::cout << "Press 4 to attack right" << std::endl;
+
+			break;
+		}
+	}
+
+	return exit;
 
 }
-Player::Entio lessFatigue (Player &p, Player :: Entio &MyEntio)
+
+Player::Entio gameController::lessFatigue(Player & p, Player::Entio & MyEntio)
 {
 	int auxFatigue = MyEntio.fatigue;
 	Player::Entio auxEntio = MyEntio;
@@ -151,6 +197,9 @@ Player::Entio lessFatigue (Player &p, Player :: Entio &MyEntio)
 
 	return auxEntio;
 }
+
+
+
 
 gameController::~gameController()
 {

@@ -11,12 +11,14 @@ public:
 	{
 		char name;
 		int live;
-		int posX;
 		int posY;
+		int posX;
 		int arrows;
 		int fatigue;
 		char actualGround;
 	};
+
+	int numPlayer;
 
 	Entio MyEntio1, MyEntio2, MyEntio3, MyEntio4, MyEntio5, MyEntio6;
 
