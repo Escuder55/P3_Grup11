@@ -42,7 +42,7 @@ void printMap(battlefield myField)
 
 void main()
 {
-
+	
 	battlefield myBattleField;
 	printMap(myBattleField);
 	Player myPlayer(1, myBattleField);

@@ -37,6 +37,7 @@ Player::Player(int x, battlefield &b):b(b)
 
 }
 
+
 int Player::getMovementsRemaining()
 {
 	return movements;
@@ -58,6 +59,18 @@ int Player::getFatiga(Entio MyEntio)
 {
 	return MyEntio.fatigue;
 }
+
+void Player::decreaseEntios()
+{
+	numberOfEntios--;
+}
+
+void Player::decreaseMovements()
+{
+	movements--;
+}
+
+
 
 Player::~Player()
 {

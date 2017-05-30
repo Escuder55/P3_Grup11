@@ -146,7 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ULTIMA PRÀCTICA DE PROGRAMACIÓ\Input.inl.hh" />
+    <ClInclude Include="..\..\..\..\Desktop\Input.inl.hh" />
     <ClInclude Include="battlefield.h" />
     <ClInclude Include="gameController.h" />
     <ClInclude Include="Player.h" />

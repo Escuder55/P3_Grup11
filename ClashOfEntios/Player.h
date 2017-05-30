@@ -38,6 +38,10 @@ public:
 		}
 	}
 
+	void decreaseEntios();
+
+	void decreaseMovements();
+
 	~Player();
 
 private:

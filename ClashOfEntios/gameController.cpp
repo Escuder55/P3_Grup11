@@ -7,13 +7,15 @@ gameController::gameController(Player &p, battlefield &b):p(p), b(b)
 {
 }
 
-bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Player & currentPlayer)
+bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Player & currentPlayer, Player &secondPlayer)
 {
 
 	bool exit = false;
 
 	enti::InputKey keyPressed;
-	enti::systemPause();
+	//enti::systemPause();
+
+	//system("pause");
 
 	keyPressed = enti::getInputKey();
 
@@ -108,7 +110,9 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 
 	else if (keyPressed == enti::InputKey::ESC)
 	{
-		std::cout << "Are you sure you want to exit? (Y/N)" << std::endl;
+
+		enti::cout << enti::Color::WHITE << "Are you sure you want to exit? (Y/N)" << enti::endl;
+		enti::cout << enti::cend;
 
 		char finish;
 
@@ -140,15 +144,89 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 
 		switch (weapon)
 		{
+
+			int direction;
+
 		case 1:
 			std::cout << "Press 1 to attack up" << std::endl;
 			std::cout << "Press 2 to attack left" << std::endl;
 			std::cout << "Press 3 to attack down" << std::endl;
 			std::cout << "Press 4 to attack right" << std::endl;
 
+			std::cin >> direction;
+
+			if (currentPlayer.numPlayer == 1)
+			{
+				switch (direction)
+				{
+					char attackCell;
+				case 1:
+					attackCell = b.getCell(currentEntio.posX, currentEntio.posY + 1);
+
+					if (secondPlayer.MyEntio1.name == attackCell)
+					{
+						secondPlayer.MyEntio1.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio2.name == attackCell)
+					{
+						secondPlayer.MyEntio2.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio3.name == attackCell)
+					{
+						secondPlayer.MyEntio3.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio4.name == attackCell)
+					{
+						secondPlayer.MyEntio4.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio5.name == attackCell)
+					{
+						secondPlayer.MyEntio5.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio6.name == attackCell)
+					{
+						secondPlayer.MyEntio6.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else
+					{
+						std::cout << "Attack Missed" << std::endl;
+					}
+
+
+				default:
+					break;
+				}
+			}
+
+
+
+			break;
+
+		case 2:
+			std::cout << "Press 1 to attack up" << std::endl;
+			std::cout << "Press 2 to attack left" << std::endl;
+			std::cout << "Press 3 to attack down" << std::endl;
+			std::cout << "Press 4 to attack right" << std::endl;
+
+			std::cin >> direction;
+
 			break;
 		}
 	}
+
+	//enti::systemPause();
 
 	return exit;
 
@@ -194,6 +272,8 @@ Player::Entio gameController::lessFatigue(Player & p, Player::Entio & MyEntio)
 		auxEntio = p.MyEntio6;
 		auxFatigue = auxEntio.fatigue;
 	}
+
+
 
 	return auxEntio;
 }

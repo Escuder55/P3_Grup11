@@ -21,13 +21,13 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ULTIMA PRÀCTICA DE PROGRAMACIÓ\Input.inl.hh">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gameController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\Input.inl.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
