@@ -65,11 +65,13 @@ void Player::decreaseEntios()
 	numberOfEntios--;
 }
 
-void Player::decreaseMovements()
+void Player::movementsDecrease()
 {
-	movements--;
+	while (movements > 0)
+	{
+		movements--;
+	}
 }
-
 
 
 Player::~Player()

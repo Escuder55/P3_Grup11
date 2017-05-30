@@ -147,6 +147,8 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 
 			int direction;
 
+			char attackCell;
+
 		case 1:
 			std::cout << "Press 1 to attack up" << std::endl;
 			std::cout << "Press 2 to attack left" << std::endl;
@@ -155,12 +157,103 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 
 			std::cin >> direction;
 
-			if (currentPlayer.numPlayer == 1)
-			{
+
 				switch (direction)
 				{
-					char attackCell;
+					
 				case 1:
+					attackCell = b.getCell(currentEntio.posX - 1, currentEntio.posY);
+
+					if (secondPlayer.MyEntio1.name == attackCell)
+					{
+						secondPlayer.MyEntio1.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio2.name == attackCell)
+					{
+						secondPlayer.MyEntio2.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio3.name == attackCell)
+					{
+						secondPlayer.MyEntio3.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio4.name == attackCell)
+					{
+						secondPlayer.MyEntio4.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio5.name == attackCell)
+					{
+						secondPlayer.MyEntio5.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio6.name == attackCell)
+					{
+						secondPlayer.MyEntio6.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else
+					{
+						std::cout << "Attack Missed" << std::endl;
+					}
+
+					break;
+
+				case 2:
+					attackCell = b.getCell(currentEntio.posX, currentEntio.posY - 1);
+
+					if (secondPlayer.MyEntio1.name == attackCell)
+					{
+						secondPlayer.MyEntio1.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio2.name == attackCell)
+					{
+						secondPlayer.MyEntio2.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio3.name == attackCell)
+					{
+						secondPlayer.MyEntio3.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio4.name == attackCell)
+					{
+						secondPlayer.MyEntio4.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio5.name == attackCell)
+					{
+						secondPlayer.MyEntio5.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio6.name == attackCell)
+					{
+						secondPlayer.MyEntio6.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else
+					{
+						std::cout << "Attack Missed" << std::endl;
+					}
+
+					break;
+
+				case 3:
 					attackCell = b.getCell(currentEntio.posX, currentEntio.posY + 1);
 
 					if (secondPlayer.MyEntio1.name == attackCell)
@@ -204,13 +297,59 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 						std::cout << "Attack Missed" << std::endl;
 					}
 
+					break;
+
+				case 4:
+					attackCell = b.getCell(currentEntio.posX + 1, currentEntio.posY);
+
+					if (secondPlayer.MyEntio1.name == attackCell)
+					{
+						secondPlayer.MyEntio1.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio2.name == attackCell)
+					{
+						secondPlayer.MyEntio2.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio3.name == attackCell)
+					{
+						secondPlayer.MyEntio3.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio4.name == attackCell)
+					{
+						secondPlayer.MyEntio4.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio5.name == attackCell)
+					{
+						secondPlayer.MyEntio5.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else if (secondPlayer.MyEntio6.name == attackCell)
+					{
+						secondPlayer.MyEntio6.live = 0;
+						secondPlayer.decreaseEntios();
+					}
+
+					else
+					{
+						std::cout << "Attack Missed" << std::endl;
+					}
+
+					break;
+
+
 
 				default:
 					break;
 				}
-			}
-
-
 
 			break;
 
@@ -222,8 +361,302 @@ bool gameController::updateGame(Player::Entio &currentEntio, battlefield & b, Pl
 
 			std::cin >> direction;
 
-			break;
+			switch (direction)
+			{
+			case 1:
+
+				for (int i = 1; i <= 10; i++)
+				{
+					attackCell = b.getCell(currentEntio.posX - i, currentEntio.posY);
+					if (attackCell == 'X')
+					{
+						break;
+
+					}
+
+					else if (attackCell == secondPlayer.MyEntio1.name && i >= 3)
+					{
+						secondPlayer.MyEntio1.live -= (11 - i);
+						if (secondPlayer.MyEntio1.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+
+					else if (attackCell == secondPlayer.MyEntio2.name && i >= 3)
+					{
+						secondPlayer.MyEntio2.live -= (11 - i);
+						if (secondPlayer.MyEntio2.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio3.name && i >= 3)
+					{
+						secondPlayer.MyEntio3.live -= (11 - i);
+						if (secondPlayer.MyEntio3.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio4.name && i >= 3)
+					{
+						secondPlayer.MyEntio4.live -= (11 - i);
+						if (secondPlayer.MyEntio4.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio5.name && i >= 3)
+					{
+						secondPlayer.MyEntio5.live -= (11 - i);
+						if (secondPlayer.MyEntio5.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio6.name && i >= 3)
+					{
+						secondPlayer.MyEntio6.live -= (11 - i);
+						if (secondPlayer.MyEntio6.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+				}
+				
+				currentEntio.arrows--;
+				
+				break;
+
+			case 2:
+
+				for (int i = 1; i <= 10; i++)
+				{
+					attackCell = b.getCell(currentEntio.posX, currentEntio.posY - i);
+					if (attackCell == 'X')
+					{
+						break;
+
+					}
+
+					else if (attackCell == secondPlayer.MyEntio1.name && i >= 3)
+					{
+						secondPlayer.MyEntio1.live -= (11 - i);
+						if (secondPlayer.MyEntio1.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+
+					else if (attackCell == secondPlayer.MyEntio2.name && i >= 3)
+					{
+						secondPlayer.MyEntio2.live -= (11 - i);
+						if (secondPlayer.MyEntio2.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio3.name && i >= 3)
+					{
+						secondPlayer.MyEntio3.live -= (11 - i);
+						if (secondPlayer.MyEntio3.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio4.name && i >= 3)
+					{
+						secondPlayer.MyEntio4.live -= (11 - i);
+						if (secondPlayer.MyEntio4.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio5.name && i >= 3)
+					{
+						secondPlayer.MyEntio5.live -= (11 - i);
+						if (secondPlayer.MyEntio5.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio6.name && i >= 3)
+					{
+						secondPlayer.MyEntio6.live -= (11 - i);
+						if (secondPlayer.MyEntio6.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+				}
+
+				currentEntio.arrows--;
+
+				break;
+
+			case 3:
+
+				for (int i = 1; i <= 10; i++)
+				{
+					attackCell = b.getCell(currentEntio.posX + i, currentEntio.posY);
+					if (attackCell == 'X')
+					{
+						break;
+
+					}
+
+					else if (attackCell == secondPlayer.MyEntio1.name && i >= 3)
+					{
+						secondPlayer.MyEntio1.live -= (11 - i);
+						if (secondPlayer.MyEntio1.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+
+					else if (attackCell == secondPlayer.MyEntio2.name && i >= 3)
+					{
+						secondPlayer.MyEntio2.live -= (11 - i);
+						if (secondPlayer.MyEntio2.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio3.name && i >= 3)
+					{
+						secondPlayer.MyEntio3.live -= (11 - i);
+						if (secondPlayer.MyEntio3.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio4.name && i >= 3)
+					{
+						secondPlayer.MyEntio4.live -= (11 - i);
+						if (secondPlayer.MyEntio4.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio5.name && i >= 3)
+					{
+						secondPlayer.MyEntio5.live -= (11 - i);
+						if (secondPlayer.MyEntio5.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio6.name && i >= 3)
+					{
+						secondPlayer.MyEntio6.live -= (11 - i);
+						if (secondPlayer.MyEntio6.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+				}
+
+				currentEntio.arrows--;
+
+				break;
+
+			case 4:
+
+				for (int i = 1; i <= 10; i++)
+				{
+					attackCell = b.getCell(currentEntio.posX, currentEntio.posY + i);
+					if (attackCell == 'X')
+					{
+						break;
+
+					}
+
+					else if (attackCell == secondPlayer.MyEntio1.name && i >= 3)
+					{
+						secondPlayer.MyEntio1.live -= (11 - i);
+						if (secondPlayer.MyEntio1.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+
+					else if (attackCell == secondPlayer.MyEntio2.name && i >= 3)
+					{
+						secondPlayer.MyEntio2.live -= (11 - i);
+						if (secondPlayer.MyEntio2.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio3.name && i >= 3)
+					{
+						secondPlayer.MyEntio3.live -= (11 - i);
+						if (secondPlayer.MyEntio3.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio4.name && i >= 3)
+					{
+						secondPlayer.MyEntio4.live -= (11 - i);
+						if (secondPlayer.MyEntio4.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio5.name && i >= 3)
+					{
+						secondPlayer.MyEntio5.live -= (11 - i);
+						if (secondPlayer.MyEntio5.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+					else if (attackCell == secondPlayer.MyEntio6.name && i >= 3)
+					{
+						secondPlayer.MyEntio6.live -= (11 - i);
+						if (secondPlayer.MyEntio6.live <= 0)
+						{
+							secondPlayer.decreaseEntios;
+						}
+						break;
+					}
+				}
+
+				currentEntio.arrows--;
+
+				break;
+			}
+		//currentEntio.arrows--;
+		break;
 		}
+
+		currentEntio.fatigue--;
+		currentPlayer.movementsDecrease();
 	}
 
 	//enti::systemPause();

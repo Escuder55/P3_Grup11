@@ -30,17 +30,10 @@ public:
 
 	int getFatiga(Entio MyEntio);
 
-	void movementDecrease()
-	{
-		while (movements > 0)
-		{
-			movements--;
-		}
-	}
+
 
 	void decreaseEntios();
-
-	void decreaseMovements();
+	void movementsDecrease();
 
 	~Player();
 
