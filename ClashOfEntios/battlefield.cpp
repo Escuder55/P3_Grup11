@@ -25,7 +25,7 @@ battlefield::battlefield()
 			}
 			level.close();
 		}
-		else std::cout << "It's not possible to find the file you've just tried to open" << std::endl;
+		else std::cout << "The file is not open." << std::endl;
 	}
 
 }

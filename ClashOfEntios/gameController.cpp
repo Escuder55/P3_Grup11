@@ -10,7 +10,7 @@ gameController::gameController(Player & p, battlefield & b, Player & p2): p(p), 
 {
 }
 
-bool gameController::updateGame(Player::Entio * currentEntio, battlefield & b, Player *currentPlayer, Player *secondPlayer)
+bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Player *currentPlayer, Player *secondPlayer)
 {
 	bool exit = false;
 
@@ -107,6 +107,21 @@ bool gameController::updateGame(Player::Entio * currentEntio, battlefield & b, P
 	}
 	else if (keyPressed == enti::InputKey::ENTER)
 	{
+		char answer;
+		std::cout << "1.Change the current Entio\n" <<
+			"2.Change the current Player" << std::endl;
+		std::cin >> answer;
+		switch (answer)
+		{
+		case '1':		
+			*currentEntio = currentPlayer->MyEntio2;
+			break;
+		case '2':
+			currentPlayer = secondPlayer;
+			*currentEntio = currentPlayer->MyEntio1;
+
+			break;
+		}
 		
 	}
 
@@ -197,7 +212,7 @@ bool gameController::updateGame(Player::Entio * currentEntio, battlefield & b, P
 				{
 					secondPlayer->MyEntio4.live = 0;
 					secondPlayer->decreaseEntios();
-					b.setCell(secondPlayer->MyEntio4.posX, secondPlayer->MyEntio4.posY, secondPlayer->MyEntio4.actualGround);
+					b.setCell(secondPlayer->MyEntio4.posY, secondPlayer->MyEntio4.posX, secondPlayer->MyEntio4.actualGround);
 					std::cout << "You killed an Entio" << std::endl;
 					enti::systemPause();
 				}
