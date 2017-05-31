@@ -27,7 +27,7 @@
     <ClInclude Include="Renderer.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Desktop\Input.inl.hh">
+    <ClInclude Include="..\..\ULTIMA PRÀCTICA DE PROGRAMACIÓ\Input.inl.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

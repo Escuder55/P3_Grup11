@@ -2,8 +2,9 @@
 #include "Player.h"
 #include "gameController.h"
 #include <Windows.h>
+#include <iostream>
 
-void printMap(battlefield myField)
+void printMap(battlefield myField, Player::Entio *currentEntio)
 {
 	for (int i = 0; i < myField.rows; i++)
 	{
@@ -35,29 +36,42 @@ void printMap(battlefield myField)
 			std::cout << " ";
 
 		}
-		enti::cout << enti::endl;
+		enti::cout << currentEntio->posY << "/" << currentEntio->posX << enti::endl;
 	}
+	
 	enti::cout << enti::cend;
+	
 }
 
 void main()
 {
 	
 	battlefield myBattleField;
-	printMap(myBattleField);
+	
 	Player myPlayer(1, myBattleField);
 	Player myPlayer2(2, myBattleField);
 	gameController myGameController(myPlayer, myBattleField, myPlayer2);
 
-	
+	Player *activePlayer = &myPlayer2;
+	Player *waitingPlayer = &myPlayer;
 
-	while (myPlayer2.numberOfEntios > 0)
+	Player::Entio *currentEntio = &activePlayer->MyEntio1;
+	printMap(myBattleField, currentEntio);
+
+	//std::cout << myBattleField.field[currentEntio->posX-3][currentEntio->posY] << std::endl;
+	//system("pause");
+	bool exitGame = false;
+	while (waitingPlayer->numberOfEntios > 0 || exitGame == false)
 	{
-		myGameController.updateGame(myPlayer.MyEntio1,myBattleField,myPlayer, myPlayer2);
+		printMap(myBattleField,currentEntio);
+
+		exitGame=myGameController.updateGame(currentEntio,myBattleField,activePlayer, waitingPlayer);
 		//system("cls");
-		printMap(myBattleField);
-		//std::cout << myPlayer.MyEntio1.posX << "/" << myPlayer.MyEntio1.posY;
+		
+		
+		
 	}
 
 	std::cout << "YOU WIN!!" << std::endl;
+	system("pause");
 }
