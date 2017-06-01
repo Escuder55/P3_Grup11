@@ -463,7 +463,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 					attackCell = b.getCell(currentEntio->posX - i, currentEntio->posY);
 					if (attackCell == 'X')
 					{
-						std::cout << "Attack Missed" << std::endl;
+						std::cout << "Mountain" << std::endl;
 						enti::systemPause();
 						break;
 
@@ -538,9 +538,9 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 					}
 					else
 					{
-						std::cout << "Attack Missed" << std::endl;
-						enti::systemPause();
-						break;
+						//std::cout << "Attack Missed" << std::endl;
+						//enti::systemPause();
+						//break;
 					}
 				}
 
