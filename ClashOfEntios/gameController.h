@@ -18,7 +18,7 @@ public:
 
 	//bool arrowThrowEntio(Player::Entio MyEntio);
 
-	Player::Entio lessFatigue(Player & p, Player::Entio &MyEntio);
+	void lessFatigue(Player::Entio *MyEntio, Player *p);
 
 	enti::InputKey waitUntilKeypressed();
 
