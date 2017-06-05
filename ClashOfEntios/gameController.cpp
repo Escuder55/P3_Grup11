@@ -31,8 +31,10 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			aux = b.getCell(posAuxX, posAuxY);
 			if (aux != '.' && aux != ':')
 			{
-				std::cout << "You cannot do this movement" << std::endl;
-				system("pause");
+				
+				std::cout <<"You cannot do this movement" << std::endl;
+				enti::systemPause();
+				
 			}
 			else
 			{
@@ -94,7 +96,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			if (aux != '.' && aux != ':')
 			{
 				std::cout << "You cannot do this movement" << std::endl;
-				system("pause");
+				enti::systemPause();
 			}
 			else
 			{
@@ -157,7 +159,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			if (aux != '.' && aux != ':')
 			{
 				std::cout << "You cannot do this movement" << std::endl;
-				system("pause");
+				enti::systemPause();
 			}
 			else
 			{
@@ -220,7 +222,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			if (aux != '.' && aux != ':')
 			{
 				std::cout << "You cannot do this movement" << std::endl;
-				system("pause");
+			
 			}
 			else
 			{
@@ -322,11 +324,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			{
 				currentPlayer->movements = 10;
 				*currentEntio = secondPlayer->MyEntio1;
-				/*
-				Player *auxPlayer = currentPlayer;
-				currentPlayer = secondPlayer;
-				secondPlayer = auxPlayer;
-				*currentEntio = currentPlayer->MyEntio1;*/
+				
 				if (turn == 1) turn = 2;
 				else if (turn == 2) turn = 1;
 
@@ -1123,42 +1121,7 @@ void gameController::lessFatigue(Player::Entio &MyEntio, Player &p)
 
 }
 
-	//void gameController::lessFatigue(Player::Entio *MyEntio, Player *p)
-	//{
-	//	
-	//	if ((p->MyEntio1.fatigue <  MyEntio->fatigue && p->MyEntio1.live > 0) && MyEntio->name != p->MyEntio1.name)
-	//	{
-	//		*MyEntio = p->MyEntio1;
-	//		p->movementsDecrease();			
-	//	}
-	//	if ((p->MyEntio2.fatigue <  MyEntio->fatigue && p->MyEntio2.live > 0) && MyEntio->name != p->MyEntio2.name)
-	//	{
-	//		*MyEntio = p->MyEntio2;
-	//		p->movementsDecrease();
-	//	}
-	//	if ((p->MyEntio3.fatigue <  MyEntio->fatigue && p->MyEntio3.live > 0) && MyEntio->name != p->MyEntio3.name)
-	//	{
-	//		*MyEntio = p->MyEntio3;
-	//		p->movementsDecrease();			
-	//	}
-	//	if ((p->MyEntio4.fatigue <  MyEntio->fatigue && p->MyEntio4.live > 0) && MyEntio->name != p->MyEntio4.name)
-	//	{
-	//		*MyEntio = p->MyEntio4;
-	//		p->movementsDecrease();
-	//		
-	//	}
-	//	if ((p->MyEntio5.fatigue < MyEntio->fatigue && p->MyEntio5.live > 0) && MyEntio->name != p->MyEntio5.name)
-	//	{
-	//		*MyEntio = p->MyEntio5;
-	//		p->movementsDecrease();
-	//	}
-	//	if ((p->MyEntio6.fatigue <  MyEntio->fatigue && p->MyEntio6.live > 0) && MyEntio->name != p->MyEntio6.name)
-	//	{
-	//		*MyEntio = p->MyEntio6;
-	//		p->movementsDecrease();
-	//	}
-	//	 
-	//}
+
 
 	
 enti::InputKey gameController::waitUntilKeypressed()

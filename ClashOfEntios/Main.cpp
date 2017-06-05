@@ -38,11 +38,12 @@ void printMap(battlefield myField, Player::Entio *currentEntio, Player *currentP
 		}
 		enti::cout << enti::endl;
 	}
-	enti::cout << currentEntio->posY << "/" << currentEntio->posX << enti::endl;
+	
 	enti::cout << enti::Color::BLUE<< "Player "<< currentPlayer->numPlayer << enti::endl;
 	enti::cout << enti::Color::LIGHTGRAY << "Active Entio: " << currentEntio->name << enti::endl;
 	enti::cout << enti::Color::GREEN << "Movements: " << currentPlayer->movements;
 	enti::cout << enti::cend;
+	std::cout << std::endl;
 	
 }
 
@@ -92,6 +93,7 @@ void main()
 			waitingPlayer = &myPlayer;
 		}
 		
+		//enti::cout << enti::cend;
 
 	}
 	if (waitingPlayer->numberOfEntios <= 0)
