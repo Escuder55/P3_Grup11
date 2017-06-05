@@ -82,6 +82,7 @@ void main()
 		
 		
 		
+
 	}
 	if (waitingPlayer->numberOfEntios <= 0)
 	{

@@ -10,7 +10,7 @@ public:
 	gameController(Player &p, battlefield &b, Player &p2);
 
 	bool updateGame(Player::Entio *currentEntio, battlefield & b, Player *currentPlayer, Player *secondPlayer, int &lastX,int &lastY);
-
+	//bool updateGame(Player::Entio &currentEntio, battlefield & b, Player &currentPlayer, Player &secondPlayer, int &lastX, int &lastY);
 	Player &p;
 	battlefield &b;
 	Player &p2;
@@ -18,7 +18,8 @@ public:
 
 	//bool arrowThrowEntio(Player::Entio MyEntio);
 
-	void lessFatigue(Player::Entio *MyEntio, Player *p);
+	//void lessFatigue(Player::Entio *MyEntio, Player *p);
+	void lessFatigue(Player::Entio &MyEntio, Player &p);
 
 	enti::InputKey waitUntilKeypressed();
 
