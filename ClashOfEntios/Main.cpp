@@ -4,7 +4,7 @@
 #include <Windows.h>
 #include <iostream>
 
-void printMap(battlefield myField, Player::Entio *currentEntio)
+void printMap(battlefield myField, Player::Entio *currentEntio, Player *currentPlayer)
 {
 	for (int i = 0; i < myField.rows; i++)
 	{
@@ -36,9 +36,12 @@ void printMap(battlefield myField, Player::Entio *currentEntio)
 			std::cout << " ";
 
 		}
-		enti::cout << currentEntio->posY << "/" << currentEntio->posX << enti::endl;
+		enti::cout << enti::endl;
 	}
-	
+	enti::cout << currentEntio->posY << "/" << currentEntio->posX << enti::endl;
+	enti::cout << enti::Color::BLUE<< "Player "<< currentPlayer->numPlayer << enti::endl;
+	enti::cout << enti::Color::LIGHTGRAY << "Active Entio: " << currentEntio->name << enti::endl;
+	enti::cout << enti::Color::GREEN << "Movements: " << currentPlayer->movements;
 	enti::cout << enti::cend;
 	
 }
@@ -52,20 +55,24 @@ void main()
 	Player myPlayer2(2, myBattleField);
 	gameController myGameController(myPlayer, myBattleField, myPlayer2);
 
-	Player *activePlayer = &myPlayer2;
-	Player *waitingPlayer = &myPlayer;
+	Player *activePlayer = new Player ;
+	activePlayer = &myPlayer;
 
-	Player::Entio *currentEntio = &activePlayer->MyEntio1;
-	printMap(myBattleField, currentEntio);
+	Player *waitingPlayer =  new Player;
+	waitingPlayer = &myPlayer2;
 
-	//std::cout << myBattleField.field[currentEntio->posX-3][currentEntio->posY] << std::endl;
-	//system("pause");
+
+	Player::Entio *currentEntio = new Player::Entio;
+	currentEntio = &myPlayer.MyEntio1;
+	
+
+	
 	bool exitGame = false;
 	while ( exitGame == false )
 	{
-		printMap(myBattleField,currentEntio);
+		printMap(myBattleField,currentEntio,activePlayer);
 
-		exitGame=myGameController.updateGame(currentEntio,myBattleField,activePlayer, waitingPlayer);
+		exitGame=myGameController.updateGame(currentEntio, myBattleField, activePlayer, waitingPlayer);
 		
 		if (waitingPlayer->numberOfEntios <= 0)
 		{

@@ -15,12 +15,12 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 	bool exit = false;
 
 	enti::InputKey keyPressed = enti::InputKey::NONE;
-	//enti::systemPause();
-
-	//system("pause");
+	
 
 	keyPressed = gameController::waitUntilKeypressed();
 
+	
+	
 		if ((keyPressed == enti::InputKey::W || keyPressed == enti::InputKey::w) && currentPlayer->getMovementsRemaining() > 0)
 		{
 
@@ -138,39 +138,13 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 				if (currentPlayer->MyEntio6.fatigue < currentEntio->fatigue) *currentEntio = currentPlayer->MyEntio6;
 				
 			}
-			/*if (currentPlayer->getMovementsRemaining() > 0)
-			{
-				Player::Entio *auxEntio;
-				auxEntio = currentEntio;
-				gameController::lessFatigue(currentEntio, currentPlayer);
-
-				if (auxEntio == currentEntio)
-				{
-
-				}
-				else
-				{
-					currentPlayer->movementsDecrease();
-				}
-			}
-			else if (currentPlayer->getMovementsRemaining() == 0)
-			{
-
-					Player *auxPlayer;
-					auxPlayer = currentPlayer;
-					currentPlayer = secondPlayer;
-					secondPlayer = auxPlayer;
-					*currentEntio = currentPlayer->MyEntio1;
-
-				
-
-			}*/
+			
 
 		}
 				
 
 		
-
+		
 		else if (keyPressed == enti::InputKey::ESC)
 		{
 
@@ -911,78 +885,39 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 
 	void gameController::lessFatigue(Player::Entio *MyEntio, Player *p)
 	{
-		/*int auxFatigue = MyEntio->fatigue;
-		Player::Entio *auxEntio = MyEntio;
-
-		if (p->MyEntio1.fatigue < auxFatigue && p->MyEntio1.live > 0)
-		{
-			*auxEntio = p->MyEntio1;
-			auxFatigue = auxEntio->fatigue;
-		}
-
-		else if (p->MyEntio2.fatigue < auxFatigue && p->MyEntio2.live > 0)
-		{
-			*auxEntio = p->MyEntio2;
-			auxFatigue = auxEntio->fatigue;
-		}
-
-		else if (p->MyEntio3.fatigue < auxFatigue && p->MyEntio3.live > 0)
-		{
-			*auxEntio = p->MyEntio3;
-			auxFatigue = auxEntio->fatigue;
-		}
-
-		else if (p->MyEntio4.fatigue < auxFatigue && p->MyEntio4.live > 0)
-		{
-			*auxEntio = p->MyEntio4;
-			auxFatigue = auxEntio->fatigue;
-		}
-
-		else if (p->MyEntio5.fatigue < auxFatigue && p->MyEntio5.live > 0)
-		{
-			*auxEntio = p->MyEntio5;
-			auxFatigue = auxEntio->fatigue;
-		}
-
-		else if (p->MyEntio6.fatigue < auxFatigue && p->MyEntio6.live > 0)
-		{
-			*auxEntio = p->MyEntio6;
-			auxFatigue = auxEntio->fatigue;
-		}
-		MyEntio = auxEntio;*/
-
-		if (p->MyEntio1.fatigue <  MyEntio->fatigue && p->MyEntio1.live > 0 && MyEntio->name != p->MyEntio1.name)
+		
+		if ((p->MyEntio1.fatigue <  MyEntio->fatigue && p->MyEntio1.live > 0) && MyEntio->name != p->MyEntio1.name)
 		{
 			*MyEntio = p->MyEntio1;
 			p->movementsDecrease();			
 		}
 
-		if (p->MyEntio2.fatigue <  MyEntio->fatigue && p->MyEntio2.live > 0 && MyEntio->name != p->MyEntio1.name)
+		if ((p->MyEntio2.fatigue <  MyEntio->fatigue && p->MyEntio2.live > 0) && MyEntio->name != p->MyEntio2.name)
 		{
 			*MyEntio = p->MyEntio2;
 			p->movementsDecrease();
 		}
 
-		if (p->MyEntio3.fatigue <  MyEntio->fatigue && p->MyEntio3.live > 0 && MyEntio->name != p->MyEntio1.name)
+		if ((p->MyEntio3.fatigue <  MyEntio->fatigue && p->MyEntio3.live > 0) && MyEntio->name != p->MyEntio3.name)
 		{
 			*MyEntio = p->MyEntio3;
 			p->movementsDecrease();			
 		}
 
-		if (p->MyEntio4.fatigue <  MyEntio->fatigue && p->MyEntio4.live > 0 && MyEntio->name != p->MyEntio1.name)
+		if ((p->MyEntio4.fatigue <  MyEntio->fatigue && p->MyEntio4.live > 0) && MyEntio->name != p->MyEntio4.name)
 		{
 			*MyEntio = p->MyEntio4;
 			p->movementsDecrease();
 			
 		}
 
-		if (p->MyEntio5.fatigue < MyEntio->fatigue && p->MyEntio5.live > 0 && MyEntio->name != p->MyEntio1.name)
+		if ((p->MyEntio5.fatigue < MyEntio->fatigue && p->MyEntio5.live > 0) && MyEntio->name != p->MyEntio5.name)
 		{
 			*MyEntio = p->MyEntio5;
 			p->movementsDecrease();
 		}
 
-		if (p->MyEntio6.fatigue <  MyEntio->fatigue && p->MyEntio6.live > 0 && MyEntio->name != p->MyEntio1.name)
+		if ((p->MyEntio6.fatigue <  MyEntio->fatigue && p->MyEntio6.live > 0) && MyEntio->name != p->MyEntio6.name)
 		{
 			*MyEntio = p->MyEntio6;
 			p->movementsDecrease();

@@ -3,6 +3,7 @@
 
 
 
+
 Player::Player(int x, battlefield &b):b(b)
 {
 	if (x == 1)
