@@ -38,7 +38,7 @@ public:
 
 	~Player();
 
-private:
+//private:
 
 	int movements = 10;
 

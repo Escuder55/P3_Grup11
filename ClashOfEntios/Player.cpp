@@ -65,10 +65,8 @@ void Player::decreaseEntios()
 
 void Player::movementsDecrease()
 {
-	while (movements > 0)
-	{
-		movements--;
-	}
+	if(movements > 0) movements--;
+	
 }
 
 

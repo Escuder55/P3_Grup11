@@ -14,7 +14,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 {
 	bool exit = false;
 
-	enti::InputKey keyPressed;
+	enti::InputKey keyPressed = enti::InputKey::NONE;
 	//enti::systemPause();
 
 	//system("pause");
@@ -23,6 +23,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 
 		if ((keyPressed == enti::InputKey::W || keyPressed == enti::InputKey::w) && currentPlayer->getMovementsRemaining() > 0)
 		{
+
 			char aux;
 			int posAuxX = currentEntio->posX - 1;
 			int posAuxY = currentEntio->posY;
@@ -45,7 +46,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			}
 			
 		}
-		else if (keyPressed == enti::InputKey::A || keyPressed == enti::InputKey::a && currentPlayer->getMovementsRemaining() > 0)
+		else if ((keyPressed == enti::InputKey::A || keyPressed == enti::InputKey::a )&& currentPlayer->getMovementsRemaining() > 0)
 		{
 			char aux;
 			int posAuxX = currentEntio->posX;
@@ -69,7 +70,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			}
 
 		}
-		else if (keyPressed == enti::InputKey::S || keyPressed == enti::InputKey::s && currentPlayer->getMovementsRemaining() > 0)
+		else if ((keyPressed == enti::InputKey::S || keyPressed == enti::InputKey::s) && currentPlayer->getMovementsRemaining() > 0)
 		{
 			char aux;
 			int posAuxX = currentEntio->posX + 1;
@@ -93,7 +94,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			}
 
 		}
-		else if (keyPressed == enti::InputKey::D || keyPressed == enti::InputKey::d && currentPlayer->getMovementsRemaining() > 0)
+		else if ((keyPressed == enti::InputKey::D || keyPressed == enti::InputKey::d ) && currentPlayer->getMovementsRemaining() > 0)
 		{
 			char aux;
 			int posAuxX = currentEntio->posX;
@@ -121,6 +122,24 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 		{
 			if (currentPlayer->getMovementsRemaining() > 0)
 			{
+				lessFatigue(currentEntio, currentPlayer);
+			}
+			else
+			{
+				currentPlayer->movements = 10;
+				Player *auxPlayer = currentPlayer;
+				currentPlayer = secondPlayer;
+				secondPlayer = auxPlayer;
+				*currentEntio = currentPlayer->MyEntio1;
+				if (currentPlayer->MyEntio2.fatigue < currentEntio->fatigue) *currentEntio = currentPlayer->MyEntio2;
+				if (currentPlayer->MyEntio3.fatigue < currentEntio->fatigue) *currentEntio = currentPlayer->MyEntio3;
+				if (currentPlayer->MyEntio4.fatigue < currentEntio->fatigue) *currentEntio = currentPlayer->MyEntio4;
+				if (currentPlayer->MyEntio5.fatigue < currentEntio->fatigue) *currentEntio = currentPlayer->MyEntio5;
+				if (currentPlayer->MyEntio6.fatigue < currentEntio->fatigue) *currentEntio = currentPlayer->MyEntio6;
+				
+			}
+			/*if (currentPlayer->getMovementsRemaining() > 0)
+			{
 				Player::Entio *auxEntio;
 				auxEntio = currentEntio;
 				gameController::lessFatigue(currentEntio, currentPlayer);
@@ -145,7 +164,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 
 				
 
-			}
+			}*/
 
 		}
 				
@@ -882,19 +901,17 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 
 			//enti::systemPause();
 
-			return exit;
+			
 
 		}
-
-	
-
+		return exit;
 
 	
 }
 
 	void gameController::lessFatigue(Player::Entio *MyEntio, Player *p)
 	{
-		int auxFatigue = MyEntio->fatigue;
+		/*int auxFatigue = MyEntio->fatigue;
 		Player::Entio *auxEntio = MyEntio;
 
 		if (p->MyEntio1.fatigue < auxFatigue && p->MyEntio1.live > 0)
@@ -903,39 +920,75 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			auxFatigue = auxEntio->fatigue;
 		}
 
-		if (p->MyEntio2.fatigue < auxFatigue && p->MyEntio2.live > 0)
+		else if (p->MyEntio2.fatigue < auxFatigue && p->MyEntio2.live > 0)
 		{
 			*auxEntio = p->MyEntio2;
 			auxFatigue = auxEntio->fatigue;
 		}
 
-		if (p->MyEntio3.fatigue < auxFatigue && p->MyEntio3.live > 0)
+		else if (p->MyEntio3.fatigue < auxFatigue && p->MyEntio3.live > 0)
 		{
 			*auxEntio = p->MyEntio3;
 			auxFatigue = auxEntio->fatigue;
 		}
 
-		if (p->MyEntio4.fatigue < auxFatigue && p->MyEntio4.live > 0)
+		else if (p->MyEntio4.fatigue < auxFatigue && p->MyEntio4.live > 0)
 		{
 			*auxEntio = p->MyEntio4;
 			auxFatigue = auxEntio->fatigue;
 		}
 
-		if (p->MyEntio5.fatigue < auxFatigue && p->MyEntio5.live > 0)
+		else if (p->MyEntio5.fatigue < auxFatigue && p->MyEntio5.live > 0)
 		{
 			*auxEntio = p->MyEntio5;
 			auxFatigue = auxEntio->fatigue;
 		}
 
-		if (p->MyEntio6.fatigue < auxFatigue && p->MyEntio6.live > 0)
+		else if (p->MyEntio6.fatigue < auxFatigue && p->MyEntio6.live > 0)
 		{
 			*auxEntio = p->MyEntio6;
 			auxFatigue = auxEntio->fatigue;
 		}
+		MyEntio = auxEntio;*/
 
+		if (p->MyEntio1.fatigue <  MyEntio->fatigue && p->MyEntio1.live > 0 && MyEntio->name != p->MyEntio1.name)
+		{
+			*MyEntio = p->MyEntio1;
+			p->movementsDecrease();			
+		}
 
+		if (p->MyEntio2.fatigue <  MyEntio->fatigue && p->MyEntio2.live > 0 && MyEntio->name != p->MyEntio1.name)
+		{
+			*MyEntio = p->MyEntio2;
+			p->movementsDecrease();
+		}
 
-		 MyEntio = auxEntio;
+		if (p->MyEntio3.fatigue <  MyEntio->fatigue && p->MyEntio3.live > 0 && MyEntio->name != p->MyEntio1.name)
+		{
+			*MyEntio = p->MyEntio3;
+			p->movementsDecrease();			
+		}
+
+		if (p->MyEntio4.fatigue <  MyEntio->fatigue && p->MyEntio4.live > 0 && MyEntio->name != p->MyEntio1.name)
+		{
+			*MyEntio = p->MyEntio4;
+			p->movementsDecrease();
+			
+		}
+
+		if (p->MyEntio5.fatigue < MyEntio->fatigue && p->MyEntio5.live > 0 && MyEntio->name != p->MyEntio1.name)
+		{
+			*MyEntio = p->MyEntio5;
+			p->movementsDecrease();
+		}
+
+		if (p->MyEntio6.fatigue <  MyEntio->fatigue && p->MyEntio6.live > 0 && MyEntio->name != p->MyEntio1.name)
+		{
+			*MyEntio = p->MyEntio6;
+			p->movementsDecrease();
+		}
+
+		 
 	}
 
 	

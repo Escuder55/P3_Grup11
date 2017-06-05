@@ -61,17 +61,27 @@ void main()
 	//std::cout << myBattleField.field[currentEntio->posX-3][currentEntio->posY] << std::endl;
 	//system("pause");
 	bool exitGame = false;
-	while (waitingPlayer->numberOfEntios > 0 || exitGame == false)
+	while ( exitGame == false )
 	{
 		printMap(myBattleField,currentEntio);
 
 		exitGame=myGameController.updateGame(currentEntio,myBattleField,activePlayer, waitingPlayer);
-		//system("cls");
+		
+		if (waitingPlayer->numberOfEntios <= 0)
+		{
+			exitGame = true;
+		}
 		
 		
 		
 	}
-
-	std::cout << "YOU WIN!!" << std::endl;
-	system("pause");
+	if (waitingPlayer->numberOfEntios <= 0)
+	{
+		std::cout << "YOU WIN!!" << std::endl;
+		system("pause");
+	}
+	else
+	{
+		std::cout << "You exit the game!! "<< std::endl;
+	}
 }
