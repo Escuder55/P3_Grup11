@@ -324,18 +324,24 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			else if (currentPlayer->getMovementsRemaining() == 0)
 			{
 				currentPlayer->movements = 10;
-				*currentEntio = secondPlayer->MyEntio1;
+				
+				if (secondPlayer->MyEntio1.live > 0) {*currentEntio = secondPlayer->MyEntio1; currentEntio->fatigue = secondPlayer->MyEntio1.fatigue;}
+				else if (secondPlayer->MyEntio2.live > 0) { *currentEntio = secondPlayer->MyEntio2; currentEntio->fatigue = secondPlayer->MyEntio2.fatigue; }
+				else if (secondPlayer->MyEntio3.live > 0) { *currentEntio = secondPlayer->MyEntio3; currentEntio->fatigue = secondPlayer->MyEntio3.fatigue; }
+				else if (secondPlayer->MyEntio4.live > 0) { *currentEntio = secondPlayer->MyEntio4; currentEntio->fatigue = secondPlayer->MyEntio4.fatigue; }
+				else if (secondPlayer->MyEntio5.live > 0) { *currentEntio = secondPlayer->MyEntio5; currentEntio->fatigue = secondPlayer->MyEntio5.fatigue; }
+				else if (secondPlayer->MyEntio6.live > 0) { *currentEntio = secondPlayer->MyEntio6; currentEntio->fatigue = secondPlayer->MyEntio6.fatigue; }
 				
 				if (turn == 1) turn = 2;
 				else if (turn == 2) turn = 1;
 
 					
 
-					if (secondPlayer->MyEntio2.fatigue < currentEntio->fatigue) *currentEntio = secondPlayer->MyEntio2;
-					if (secondPlayer->MyEntio3.fatigue < currentEntio->fatigue) *currentEntio = secondPlayer->MyEntio3;
-					if (secondPlayer->MyEntio4.fatigue < currentEntio->fatigue) *currentEntio = secondPlayer->MyEntio4;
-					if (secondPlayer->MyEntio5.fatigue < currentEntio->fatigue) *currentEntio = secondPlayer->MyEntio5;
-					if (secondPlayer->MyEntio6.fatigue < currentEntio->fatigue) *currentEntio = secondPlayer->MyEntio6;
+					if (secondPlayer->MyEntio2.fatigue < currentEntio->fatigue && secondPlayer->MyEntio2.live > 0) *currentEntio = secondPlayer->MyEntio2;
+					if (secondPlayer->MyEntio3.fatigue < currentEntio->fatigue && secondPlayer->MyEntio3.live > 0) *currentEntio = secondPlayer->MyEntio3;
+					if (secondPlayer->MyEntio4.fatigue < currentEntio->fatigue && secondPlayer->MyEntio4.live > 0) *currentEntio = secondPlayer->MyEntio4;
+					if (secondPlayer->MyEntio5.fatigue < currentEntio->fatigue && secondPlayer->MyEntio5.live > 0) *currentEntio = secondPlayer->MyEntio5;
+					if (secondPlayer->MyEntio6.fatigue < currentEntio->fatigue && secondPlayer->MyEntio6.live > 0) *currentEntio = secondPlayer->MyEntio6;
 				
 			}
 			
