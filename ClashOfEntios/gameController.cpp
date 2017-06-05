@@ -222,6 +222,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			if (aux != '.' && aux != ':')
 			{
 				std::cout << "You cannot do this movement" << std::endl;
+				enti::systemPause();
 			
 			}
 			else
@@ -765,9 +766,9 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 							}
 							else
 							{
-								//std::cout << "Attack Missed" << std::endl;
-								//enti::systemPause();
-								//break;
+								std::cout << "Attack Missed" << std::endl;
+								enti::systemPause();
+								break;
 							}
 						}
 
@@ -994,6 +995,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 									enti::systemPause();
 									break;
 								}
+							}
 								else if (attackCell == secondPlayer->MyEntio3.name && i >= 3)
 								{
 									secondPlayer->MyEntio3.live -= (11 - i);
@@ -1058,11 +1060,12 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 						enti::systemPause();
 
 					}
+				
 
-			default:
+			/*default:
 				std::cout << "That is not a valid input" << std::endl;
 				enti::systemPause();
-				}
+				}*/
 
 				else
 				{

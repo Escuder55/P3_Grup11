@@ -26,7 +26,7 @@ Player::Player(int x, battlefield &b):b(b)
 		MyEntio3 = { '3', 10, 56, 17, 10, 0, '.' };
 		MyEntio4 = { '4', 10, 52, 18, 10, 0, '.' };
 		MyEntio5 = { '5', 10, 56, 18, 10, 0, '.' };
-		MyEntio6 = { '6', 10, 21, 54, 19, 0, '.' };
+		MyEntio6 = { '6', 10, 54, 19, 10, 0, '.' };
 
 		numPlayer = 2;
 
