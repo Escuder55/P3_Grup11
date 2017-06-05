@@ -68,14 +68,16 @@ void main()
 	
 	int lastX,
 		lastY,
-		turn = 1;
+		turn = 1,
+		counter = 0;
+
 	
 	bool exitGame = false;
 	while ( exitGame == false )
 	{
 		printMap(myBattleField,currentEntio,activePlayer);
 
-		exitGame=myGameController.updateGame(currentEntio, myBattleField, activePlayer, waitingPlayer,lastX,lastY,turn);
+		exitGame=myGameController.updateGame(currentEntio, myBattleField, activePlayer, waitingPlayer,lastX,lastY,turn, counter);
 		
 		if (waitingPlayer->numberOfEntios <= 0)
 		{

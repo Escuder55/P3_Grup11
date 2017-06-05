@@ -10,7 +10,7 @@ gameController::gameController(Player & p, battlefield & b, Player & p2): p(p), 
 {
 }
 
-bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Player *currentPlayer, Player *secondPlayer,int &lastX,int &lastY, int &turn)
+bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Player *currentPlayer, Player *secondPlayer,int &lastX,int &lastY, int &turn, int &counter)
 {
 	bool exit = false;
 
@@ -323,7 +323,10 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			}
 			else if (currentPlayer->getMovementsRemaining() == 0)
 			{
+				*currentEntio = secondPlayer->MyEntio1;
 				currentPlayer->movements = 10;
+
+				
 				
 				if (secondPlayer->MyEntio1.live > 0) {*currentEntio = secondPlayer->MyEntio1; currentEntio->fatigue = secondPlayer->MyEntio1.fatigue;}
 				else if (secondPlayer->MyEntio2.live > 0) { *currentEntio = secondPlayer->MyEntio2; currentEntio->fatigue = secondPlayer->MyEntio2.fatigue; }
@@ -334,14 +337,31 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 				
 				if (turn == 1) turn = 2;
 				else if (turn == 2) turn = 1;
-
-					
+				
+					if (secondPlayer->MyEntio1.fatigue < currentEntio->fatigue && secondPlayer->MyEntio1.live > 0) *currentEntio = secondPlayer->MyEntio1;
 
 					if (secondPlayer->MyEntio2.fatigue < currentEntio->fatigue && secondPlayer->MyEntio2.live > 0) *currentEntio = secondPlayer->MyEntio2;
 					if (secondPlayer->MyEntio3.fatigue < currentEntio->fatigue && secondPlayer->MyEntio3.live > 0) *currentEntio = secondPlayer->MyEntio3;
 					if (secondPlayer->MyEntio4.fatigue < currentEntio->fatigue && secondPlayer->MyEntio4.live > 0) *currentEntio = secondPlayer->MyEntio4;
 					if (secondPlayer->MyEntio5.fatigue < currentEntio->fatigue && secondPlayer->MyEntio5.live > 0) *currentEntio = secondPlayer->MyEntio5;
 					if (secondPlayer->MyEntio6.fatigue < currentEntio->fatigue && secondPlayer->MyEntio6.live > 0) *currentEntio = secondPlayer->MyEntio6;
+
+					if (currentEntio->name == '6')
+					{
+						if (counter == 0)
+						{
+							counter = 1;
+						}
+						else if (counter == 1)
+						{
+							*currentEntio = secondPlayer->MyEntio1;
+							counter = 0;
+						}
+					}
+					else
+					{
+						counter = 0;
+					}
 					//nose
 				
 			}
@@ -711,6 +731,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio1.posX, secondPlayer->MyEntio1.posY, secondPlayer->MyEntio1.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -723,6 +744,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio2.posX, secondPlayer->MyEntio2.posY, secondPlayer->MyEntio2.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -734,6 +756,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio3.posX, secondPlayer->MyEntio3.posY, secondPlayer->MyEntio3.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -745,6 +768,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio4.posX, secondPlayer->MyEntio4.posY, secondPlayer->MyEntio4.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -756,6 +780,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio5.posX, secondPlayer->MyEntio5.posY, secondPlayer->MyEntio5.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -767,6 +792,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio6.posX, secondPlayer->MyEntio6.posY, secondPlayer->MyEntio6.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -803,6 +829,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio1.posX, secondPlayer->MyEntio1.posY, secondPlayer->MyEntio1.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -815,6 +842,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio2.posX, secondPlayer->MyEntio2.posY, secondPlayer->MyEntio2.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -826,6 +854,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio3.posX, secondPlayer->MyEntio3.posY, secondPlayer->MyEntio3.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -837,6 +866,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio4.posX, secondPlayer->MyEntio4.posY, secondPlayer->MyEntio4.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -848,6 +878,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio5.posX, secondPlayer->MyEntio5.posY, secondPlayer->MyEntio5.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -859,6 +890,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio6.posX, secondPlayer->MyEntio6.posY, secondPlayer->MyEntio6.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -895,6 +927,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio1.posX, secondPlayer->MyEntio1.posY, secondPlayer->MyEntio1.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -907,6 +940,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio2.posX, secondPlayer->MyEntio2.posY, secondPlayer->MyEntio2.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -918,6 +952,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio3.posX, secondPlayer->MyEntio3.posY, secondPlayer->MyEntio3.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -929,6 +964,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio4.posX, secondPlayer->MyEntio4.posY, secondPlayer->MyEntio4.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -940,6 +976,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio5.posX, secondPlayer->MyEntio5.posY, secondPlayer->MyEntio5.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -950,6 +987,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								if (secondPlayer->MyEntio6.live <= 0)
 								{
 									secondPlayer->decreaseEntios();
+									b.setCell(secondPlayer->MyEntio6.posX, secondPlayer->MyEntio6.posY, secondPlayer->MyEntio6.actualGround);
 									std::cout << "You killed an Entio" << std::endl;
 									enti::systemPause();
 								}
@@ -987,6 +1025,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio1.posX, secondPlayer->MyEntio1.posY, secondPlayer->MyEntio1.actualGround);
 									enti::systemPause();
 								}
 								break;
@@ -999,6 +1038,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 								{
 									secondPlayer->decreaseEntios();
 									std::cout << "You killed an Entio" << std::endl;
+									b.setCell(secondPlayer->MyEntio2.posX, secondPlayer->MyEntio2.posY, secondPlayer->MyEntio2.actualGround);
 									enti::systemPause();
 									break;
 								}
@@ -1010,6 +1050,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 									{
 										secondPlayer->decreaseEntios();
 										std::cout << "You killed an Entio" << std::endl;
+										b.setCell(secondPlayer->MyEntio3.posX, secondPlayer->MyEntio3.posY, secondPlayer->MyEntio3.actualGround);
 										enti::systemPause();
 									}
 									break;
@@ -1021,6 +1062,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 									{
 										secondPlayer->decreaseEntios();
 										std::cout << "You killed an Entio" << std::endl;
+										b.setCell(secondPlayer->MyEntio4.posX, secondPlayer->MyEntio4.posY, secondPlayer->MyEntio4.actualGround);
 										enti::systemPause();
 									}
 									break;
@@ -1032,6 +1074,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 									{
 										secondPlayer->decreaseEntios();
 										std::cout << "You killed an Entio" << std::endl;
+										b.setCell(secondPlayer->MyEntio5.posX, secondPlayer->MyEntio5.posY, secondPlayer->MyEntio5.actualGround);
 										enti::systemPause();
 									}
 									break;
@@ -1043,6 +1086,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 									{
 										secondPlayer->decreaseEntios();
 										std::cout << "You killed an Entio" << std::endl;
+										b.setCell(secondPlayer->MyEntio6.posX, secondPlayer->MyEntio6.posY, secondPlayer->MyEntio6.actualGround);
 										enti::systemPause();
 									}
 									break;
