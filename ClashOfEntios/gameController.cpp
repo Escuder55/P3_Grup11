@@ -10,7 +10,7 @@ gameController::gameController(Player & p, battlefield & b, Player & p2): p(p), 
 {
 }
 
-bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Player *currentPlayer, Player *secondPlayer)
+bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Player *currentPlayer, Player *secondPlayer,int &lastX,int &lastY)
 {
 	bool exit = false;
 
@@ -36,6 +36,8 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			}
 			else
 			{
+				lastX = currentEntio->posX;
+				lastY = currentEntio->posY;
 				char entio = currentEntio->name;
 				b.setCell(currentEntio->posX, currentEntio->posY, currentEntio->actualGround);
 				currentEntio->posX--;
@@ -60,6 +62,8 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			}
 			else
 			{
+				lastX = currentEntio->posX;
+				lastY = currentEntio->posY;
 				char entio = currentEntio->name;
 				b.setCell(currentEntio->posX, currentEntio->posY, currentEntio->actualGround);
 				currentEntio->posY--;
@@ -84,6 +88,8 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			}
 			else
 			{
+				lastX = currentEntio->posX;
+				lastY = currentEntio->posY;
 				char entio = currentEntio->name;
 				b.setCell(currentEntio->posX, currentEntio->posY, currentEntio->actualGround);
 				currentEntio->posX++;
@@ -108,6 +114,8 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 			}
 			else
 			{
+				lastX = currentEntio->posX;
+				lastY = currentEntio->posY;
 				char entio = currentEntio->name;
 				b.setCell(currentEntio->posX, currentEntio->posY, currentEntio->actualGround);
 				currentEntio->posY++;
@@ -117,6 +125,13 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 				currentEntio->fatigue++;
 			}
 
+		}
+		else if (keyPressed == enti::InputKey::Z || keyPressed == enti::InputKey::z)
+		{
+			b.setCell(currentEntio->posX, currentEntio->posY, currentEntio->actualGround);
+			currentEntio->posX = lastX;
+			currentEntio->posY = lastY;
+			b.setCell(currentEntio->posX, currentEntio->posY, currentEntio->name);
 		}
 		else if (keyPressed == enti::InputKey::ENTER)
 		{

@@ -55,24 +55,25 @@ void main()
 	Player myPlayer2(2, myBattleField);
 	gameController myGameController(myPlayer, myBattleField, myPlayer2);
 
-	Player *activePlayer = new Player ;
-	activePlayer = &myPlayer;
+	Player *activePlayer = &myPlayer;
+	
 
-	Player *waitingPlayer =  new Player;
-	waitingPlayer = &myPlayer2;
+	Player *waitingPlayer = &myPlayer2;
+	
 
 
 	Player::Entio *currentEntio = new Player::Entio;
 	currentEntio = &myPlayer.MyEntio1;
 	
-
+	int lastX,
+		lastY;
 	
 	bool exitGame = false;
 	while ( exitGame == false )
 	{
 		printMap(myBattleField,currentEntio,activePlayer);
 
-		exitGame=myGameController.updateGame(currentEntio, myBattleField, activePlayer, waitingPlayer);
+		exitGame=myGameController.updateGame(currentEntio, myBattleField, activePlayer, waitingPlayer,lastX,lastY);
 		
 		if (waitingPlayer->numberOfEntios <= 0)
 		{

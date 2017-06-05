@@ -9,7 +9,7 @@ class gameController
 public:
 	gameController(Player &p, battlefield &b, Player &p2);
 
-	bool updateGame(Player::Entio *currentEntio, battlefield & b, Player *currentPlayer, Player *secondPlayer);
+	bool updateGame(Player::Entio *currentEntio, battlefield & b, Player *currentPlayer, Player *secondPlayer, int &lastX,int &lastY);
 
 	Player &p;
 	battlefield &b;
