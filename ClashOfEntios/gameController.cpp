@@ -342,6 +342,7 @@ bool gameController::updateGame(Player::Entio *currentEntio, battlefield & b, Pl
 					if (secondPlayer->MyEntio4.fatigue < currentEntio->fatigue && secondPlayer->MyEntio4.live > 0) *currentEntio = secondPlayer->MyEntio4;
 					if (secondPlayer->MyEntio5.fatigue < currentEntio->fatigue && secondPlayer->MyEntio5.live > 0) *currentEntio = secondPlayer->MyEntio5;
 					if (secondPlayer->MyEntio6.fatigue < currentEntio->fatigue && secondPlayer->MyEntio6.live > 0) *currentEntio = secondPlayer->MyEntio6;
+					//nose
 				
 			}
 			
