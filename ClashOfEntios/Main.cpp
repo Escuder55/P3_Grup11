@@ -66,21 +66,31 @@ void main()
 	currentEntio = &myPlayer.MyEntio1;
 	
 	int lastX,
-		lastY;
+		lastY,
+		turn = 1;
 	
 	bool exitGame = false;
 	while ( exitGame == false )
 	{
 		printMap(myBattleField,currentEntio,activePlayer);
 
-		exitGame=myGameController.updateGame(currentEntio, myBattleField, activePlayer, waitingPlayer,lastX,lastY);
+		exitGame=myGameController.updateGame(currentEntio, myBattleField, activePlayer, waitingPlayer,lastX,lastY,turn);
 		
 		if (waitingPlayer->numberOfEntios <= 0)
 		{
 			exitGame = true;
 		}
 		
-		
+		if (turn == 1)
+		{
+			activePlayer = &myPlayer;
+			waitingPlayer = &myPlayer2;
+		}
+		else if (turn == 2)
+		{
+			activePlayer = &myPlayer2;
+			waitingPlayer = &myPlayer;
+		}
 		
 
 	}
